@@ -1,0 +1,13 @@
+{% extends "front/base.html.twig" %}
+
+{% block main %}
+
+    <h1>les images qui correspondent à votre recherche sont : </h1>
+
+    {% for media in medias %}
+        <h3> {{media.title}} </h3>
+        
+    {% endfor %}
+
+
+{% endblock %}

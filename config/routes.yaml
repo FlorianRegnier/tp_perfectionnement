@@ -1,0 +1,50 @@
+#Front Media
+
+front_list_media:
+        path: /front/medias/
+        controller: App\Controller\Front\MediaController::listMedia
+
+
+front_show_media:
+        path: /front/media/{id}/
+        controller: App\Controller\Front\MediaController::showMedia
+
+
+front_search:
+        path: /front/search/
+        controller: App\Controller\Front\MediaController::frontSearch
+
+
+media_like:
+        path: /front/like/media/{id}/
+        controller: App\Controller\Front\MediaController::likeMedia
+
+
+
+
+
+
+
+#Front Category
+
+front_list_category:
+        path: /front/categories/
+        controller: App\Controller\Front\CategoryController::listCategory
+
+front_show_category:
+        path: /front/category/{id}/
+        controller: App\Controller\Front\CategoryController::showCategory
+
+
+
+
+#Front User
+
+insert_user:
+        path: /front/user/insert/
+        controller: App\Controller\Front\UserController::insertUser
+
+
+
+ 
+

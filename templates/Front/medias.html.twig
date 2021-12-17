@@ -1,0 +1,69 @@
+{% extends "front/base.html.twig" %}
+
+
+{% block main %}
+
+    
+
+    <h1>Liste des images</h1>
+
+    {% for media in medias %}
+       
+        <a href="{{ path('front_show_media', { 'id' : media.id }) }}" >
+            <h2  > {{ media.title }} </h2>
+            <img src="{{ asset('media/' ~ media.src ) }}" alt="{{ media.alt }}">
+
+
+        </a>
+        <h5> Categorie : {{ media.category.name }} </h5>
+
+
+
+        <a href="{{ path("media_like", {'id' : media.id})  }}" class="btn btn-link js-likes">
+ {# app;user est la variable qui enregistre le user connecté si personne nest connecte la variable est vide #}
+
+            {% if app.user and media.isLikedByUser(app.user) %}
+                    <i class="fas fa-thumbs-up"></i>
+            {% else %}
+                    <i class="far fa-thumbs-up"></i>            
+            {% endif %}
+            
+			<span class="js-likes">{{ media.likes | length}}</span>
+			<span class="js-label">J'aime</span>
+                
+		</a>
+
+
+    {% endfor %}
+
+    
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+		function onClickLike(event) {
+    event.preventDefault();
+    const url = this.href;
+    const spanCount = this.querySelector('span.js-likes');
+    const icone = this.querySelector('i');
+    axios.get(url).then(function (response) {
+    spanCount.textContent = response.data.likes;
+    if (icone.classList.contains('fas')) {
+    icone.classList.replace('fas', 'far');
+    } else {
+    icone.classList.replace('far', 'fas');
+    }
+    }).catch(function (error) {
+        if (error.response.status === 403) {
+            window.alert("Connexion requise");
+        } else {
+            window.alert("Une erreur s'est produite");
+        }
+        })
+    }
+    document.querySelectorAll('a.js-likes').forEach(function (link) {
+    link.addEventListener('click', onClickLike);
+    })
+</script>
+
+
+    
+{% endblock %}
